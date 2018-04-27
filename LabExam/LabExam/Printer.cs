@@ -2,14 +2,12 @@
 using System.IO;
 
 namespace LabExam
-{
-    /// <summary>
-    /// remade struct to class for inheritance
+{   /// <summary>
+    /// 1.Change from Printer struct to class;
+    /// 2.Add method Print;
     /// </summary>
-    public class Printer : IPrinter
+    internal class Printer : IPrinter
     {
-        public string Name { get; set; }
-        public string Model { get; set; }
 
         public void Print(FileStream fs)
         {
@@ -18,6 +16,12 @@ namespace LabExam
                 // simulate printing
                 Console.WriteLine(fs.ReadByte());
             }
-        }  
-    }  
+        }
+
+        public string Name { get; set; }
+
+        public string Model { get; set; }
+
+       
+    }
 }

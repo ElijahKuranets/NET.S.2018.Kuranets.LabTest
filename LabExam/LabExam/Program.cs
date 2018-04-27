@@ -11,45 +11,37 @@ namespace LabExam
         [STAThread]
         static void Main(string[] args)
         {
-            Console.WriteLine("Select your choice: \n1:Add new printer\n2:Print on Canon\n3:Print on Epson\n");
+            var printerManager = new PrinterManager(new Logger());
+            PrinterManager.OnPrinted += PrinterManager_OnPrinted;
+            while (true)
+            {
+                printerManager.Show();
+                Process(printerManager);    
+            }
+        }
+        #region Private methods
+        private static void Process(PrinterManager printerManager)
+        { 
             var key = Console.ReadKey();
 
             if (key.Key == ConsoleKey.D1)
             {
-                CreatePrinter();
+                printerManager.CreatePrinter();
             }
-
-            if (key.Key == ConsoleKey.D2)
+            else
             {
-                Print(new CanonPrinter());
-            }
-
-            if (key.Key == ConsoleKey.D3)
-            {
-                Print(new EpsonPrinter());
-            }
-
-            while (true)
-            {
-                // waiting
+                int choice = Convert.ToInt32(key.KeyChar.ToString()) - 2;
+ 
+                
+                printerManager.Print(printerManager.Printers[choice]);
             }
         }
 
-        private static void Print(EpsonPrinter epsonPrinter)
+        private static void PrinterManager_OnPrinted(string arg)
         {
-            PrinterManager.Print(epsonPrinter);
-            PrinterManager.Log("Printed on Epson");
+            Console.WriteLine($"Message:{arg}");
+            Console.ReadLine();
         }
-
-        private static void Print(CanonPrinter canonPrinter)
-        {
-            PrinterManager.Print(canonPrinter);
-            PrinterManager.Log("Printed on Canon");
-        }
-
-        private static void CreatePrinter()
-        {
-            PrinterManager.Add(new Printer());
-        }
+        #endregion
     }
 }

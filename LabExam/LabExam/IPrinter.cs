@@ -1,14 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 namespace LabExam
 {
-    interface IPrinter
+    /// <summary>
+    /// interface IPrinter 
+    /// </summary>
+    public interface IPrinter
     {
-       void Print(FileStream fs);
+        void Print(FileStream fs);
+
+        string Name { get; set; }
+
+        string Model { get; set; }
+
+
     }
 }

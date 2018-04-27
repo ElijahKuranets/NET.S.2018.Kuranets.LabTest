@@ -5,6 +5,9 @@ namespace LabExam
 {
     internal class CanonPrinter : Printer
     {
+        /// <summary>
+        /// Printer Canon
+        /// </summary>
         public CanonPrinter()
         {
             Name = "Canon";
